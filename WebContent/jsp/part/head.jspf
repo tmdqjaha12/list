@@ -27,7 +27,7 @@
 <script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
 <script src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
 
-<title>장희성 블로그</title>
+<title>하승범 블로그</title>
 </head>
 
 <body>
@@ -43,18 +43,20 @@
 		<nav class="menu-box-1 flex-grow-1">
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/s/home/main" class="block">Home</a></li>
-				<li><a href="#" class="block">Articles</a></li>
+				<li><a href="${pageContext.request.contextPath}/s/article/list" class="block">Articles</a></li>
 				<li><a href="${pageContext.request.contextPath}/s/home/aboutMe" class="block">AboutMe</a></li>
 				<li>
 					<a href="#" class="block">SNS</a>
 					<ul>
-						<li><a href="https://github.com/jhs512" target="_blank" class="block">GITHUB</a></li>
-						<li><a href="https://github.com/jhs512" target="_blank" class="block">INSTA</a></li>
+						<li><a href="https://meloporn.tistory.com/" target="_blank" class="block">TISTORY</a></li>
+						<li><a href="https://github.com/tmdqjaha12" target="_blank" class="block">GITHUB</a></li>
+						<li><a href="https://twitter.com/explore" target="_blank" class="block">TWITER</a></li>
 					</ul>
 				</li>
 			</ul>
 		</nav>
 	</div>
+	
 	<div class="top-bar visible-on-md-up">
 		<div class="con flex flex-jc-sb height-100p">
 			<a href="${pageContext.request.contextPath}/s/home/main" class="logo flex flex-ai-c"> <i class="fas fa-award"></i>
@@ -63,12 +65,13 @@
 			<nav class="menu-box-1">
 				<ul class="flex height-100p">
 					<li><a href="${pageContext.request.contextPath}/s/home/main" class="flex height-100p flex-ai-c">Home</a></li>
-					<li><a href="#" class="flex height-100p flex-ai-c">Articles</a></li>
+					<li><a href="${pageContext.request.contextPath}/s/article/list" class="flex height-100p flex-ai-c">Articles</a></li>
 					<li><a href="${pageContext.request.contextPath}/s/home/aboutMe" class="flex height-100p flex-ai-c">AboutMe</a></li>
 					<li><a href="#" class="flex height-100p flex-ai-c">SNS</a>
 						<ul>
-							<li><a href="https://github.com/jhs512" target="_blank" class="block">GITHUB</a></li>
-							<li><a href="https://github.com/jhs512" target="_blank" class="block">INSTA</a></li>
+							<li><a href="https://meloporn.tistory.com/" target="_blank" class="block">TISTORY</a></li>
+						<li><a href="https://github.com/tmdqjaha12" target="_blank" class="block">GITHUB</a></li>
+						<li><a href="https://twitter.com/explore" target="_blank" class="block">TWITER</a></li>
 						</ul>
 					</li>
 				</ul>

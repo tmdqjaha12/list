@@ -1,9 +1,10 @@
 <%@ page import="com.sbs.java.blog.dto.Article"%>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <%
-	Article article = (Article) request.getAttribute("article");
+	List<Article> articles = (List) request.getAttribute("articles");
 %>
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
 <script
@@ -42,6 +43,15 @@
 	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 
 <div class="con">
+
+	<ul class="list">
+		<li><a href="#">id</a></li>
+		<li><a href="#">regDate</a></li>
+		<li><a href="#">title</a></li>
+		<li><a href="#">member</a></li>
+		<li><a href="#">views</a></li>
+	</ul>
+
 	<h1><%=article.getTitle()%></h1>
 	
 	<div>
@@ -50,6 +60,16 @@
 	
 	<div id="origin1" style="display: none;"><%=article.getBody()%></div>
 	<div id="viewer1"></div>
+	<script>
+		var editor1__initialValue = $('#origin1').html();
+		var editor1 = new toastui.Editor({
+			el : document.querySelector('#viewer1'),
+			height : '600px',
+			initialValue : editor1__initialValue,
+			viewer : true,
+			plugins : [ toastui.Editor.plugin.codeSyntaxHighlight ]
+		});
+	</script>
 </div>
 
 

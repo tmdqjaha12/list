@@ -15,6 +15,8 @@ public class DBUtil {
 	public static Map<String, Object> selectRow(Connection connection, String sql) {
 		List<Map<String, Object>> rows = selectRows(connection, sql);
 
+		// System.out.println("rows : " + rows); []비어있다
+
 		if (rows.size() == 0) {
 			return new HashMap<>();
 		}
@@ -35,11 +37,14 @@ public class DBUtil {
 			int columnSize = metaData.getColumnCount();
 
 			while (rs.next()) {
+//				System.out.println();
 				Map<String, Object> row = new HashMap<>();
 
 				for (int columnIndex = 0; columnIndex < columnSize; columnIndex++) {
 					String columnName = metaData.getColumnName(columnIndex + 1);
 					Object value = rs.getObject(columnName);
+
+//					System.out.println("columnName : " + columnName);
 
 					if (value instanceof Long) {
 						int numValue = (int) (long) value;

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -15,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.util.DBUtil;
 
-@WebServlet("/s/article/detail")
-public class ArticleDetailServlet extends HttpServlet {
+@WebServlet("/s/article/list")
+public class ArticleListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
@@ -41,11 +43,10 @@ public class ArticleDetailServlet extends HttpServlet {
 		try (Connection connection = DriverManager.getConnection(url, user, password)) {
 			// DB 접속 성공
 
-			int id = Integer.parseInt(request.getParameter("id"));
-			Article article = getArticle(connection, id);
+			List<Article> articles = getArticles(connection);
 			// System.out.println(article);
 			
-			request.setAttribute("article", article);
+			request.setAttribute("articles", articles);
 			request.getRequestDispatcher("/jsp/article/detail.jsp").forward(request, response);
 
 		} catch (SQLException e) {
@@ -55,17 +56,21 @@ public class ArticleDetailServlet extends HttpServlet {
 		}
 	}
 
-	private Article getArticle(Connection conn, int id) {
+	private List<Article> getArticles(Connection conn) {
+//		sb.append(String.format("WHERE 1 "));
 		String sql = "";
 
 		sql += String.format("SELECT * ");
-		sql += String.format("FROM article ");
-		sql += String.format("WHERE id = %d ", id);
-		
-		// System.out.println("sql : " + sql);
+		sql += String.format("FROM `article` ");
+		sql += String.format("ORDER BY id DESC ");
 
-		Map<String, Object> row = DBUtil.selectRow(conn, sql);
+		List<Article> articles = new ArrayList<>();
+		List<Map<String, Object>> rows = DBUtil.selectRows(conn, sql);
 
-		return new Article(row);
+		for (Map<String, Object> row : rows) {
+			articles.add(new Article(row));
+		}
+
+		return articles;
 	}
 }
