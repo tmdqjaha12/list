@@ -1,0 +1,35 @@
+사이트정보
+주소 : site36.iu.gy:8080
+운영주소 : https://meloporn.blog.iu.gy/blog/s/home/main
+
+*블로그 FTP정보
+주소 : site??.iu.gy
+계정 : site?? / sbs123414
+
+mysql
+주소 : site??.iu.gy
+계정 : wite?? / sbs123414
+포트 : 3306
+DB : site36
+
+
+
+
+
+site??.iu.gy:3306?site36?
+site36
+sbs123414
+ㅡㅡㅡㅡㅡㅡㅡㅡ실무환경ㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+자바 블로그 실무 운영환경 DB 사용법
+
+ex)
+
+site40
+
+new connection : site40@site40.iu.gy
+
+address - site40.iu.gy
+name - site40
+pw
+db - site40

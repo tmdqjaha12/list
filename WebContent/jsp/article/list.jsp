@@ -1,10 +1,10 @@
 <%@ page import="com.sbs.java.blog.dto.Article"%>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <%
-	List<Article> articles = (List) request.getAttribute("articles");
+	List<Article> articles = (List<Article>) request.getAttribute("articles");
 %>
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
 <script
@@ -42,34 +42,33 @@
 <link rel="stylesheet"
 	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 
-<div class="con">
+<img class="bg-java" style="border-radius: 50px; width:100%; opacity: 0.35; z-index:-1; position:absolute;"
+	src="${pageContext.request.contextPath}/resource/img/java.jpg" alt="" />
 
-	<ul class="list">
-		<li><a href="#">id</a></li>
-		<li><a href="#">regDate</a></li>
-		<li><a href="#">title</a></li>
-		<li><a href="#">member</a></li>
-		<li><a href="#">views</a></li>
+<h1 style="text-align: center;">게시물 리스트</h1>
+
+<div class="con menu1">
+	<ul class="row menu-list-1">
+		<li class="cell">ID</li>
+		<li class="cell">등록날짜</li>
+		<li class="cell">갱신날짜</li>
+		<li class="cell">제목</li>
 	</ul>
+</div>
 
-	<h1><%=article.getTitle()%></h1>
-	
-	<div>
-		이모지 테스트 : 😀😁
-	</div>
-	
-	<div id="origin1" style="display: none;"><%=article.getBody()%></div>
-	<div id="viewer1"></div>
-	<script>
-		var editor1__initialValue = $('#origin1').html();
-		var editor1 = new toastui.Editor({
-			el : document.querySelector('#viewer1'),
-			height : '600px',
-			initialValue : editor1__initialValue,
-			viewer : true,
-			plugins : [ toastui.Editor.plugin.codeSyntaxHighlight ]
-		});
-	</script>
+<div class="con menu2" style="">
+	<%
+		for (Article article : articles) {
+	%>
+	<ul class="row menu-list-2">
+		<li class="cell"><%=article.getId()%></li>
+		<li class="cell"><%=article.getRegDate()%></li>
+		<li class="cell"><%=article.getUpdateDate()%></li>
+		<li class="cell"><a href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></li>
+	</ul>
+	<%
+		}
+	%>
 </div>
 
 

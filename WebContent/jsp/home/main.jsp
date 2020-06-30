@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/jsp/part/head.jspf" %>
+<%@ include file="/jsp/part/head.jspf"%>
+<img style="border-radius: 50px; width:100%;"
+	src="${pageContext.request.contextPath}/resource/img/java.jpg" alt="" />
 <div class="con">
-	<h1>메인</h1>
+	<section class="bg-1 img-box">
+		<img src="${pageContext.request.contextPath}/resource/img/com.jpg"
+			alt="" />
+	</section>
+
 </div>
-<%@ include file="/jsp/part/foot.jspf" %>
+<%@ include file="/jsp/part/foot.jspf"%>

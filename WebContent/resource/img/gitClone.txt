@@ -1,0 +1,24 @@
+git clone 주소
+import
+general
+projects from folder or archive
+new
+properties
+projectFacets
+Converto_faceted form...
+Dynamic_Web-Module
+apply
+Runtimes - Apache_Tomcat v9.0
+apply
+Web_Project_Setting - Context root
+
+ㅡㅡㅡㅡㅡㅡㅡㅡignoreㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+git status
+window/show/projectex
+window/show/Navigator
+.gitignore
+bin/ 추가
+git status
+
+컨텍스트 루트 변수화
+${pageContext.request.contextPath}/home/main

@@ -34,8 +34,8 @@ public class ArticleDetailServlet extends HttpServlet {
 		// DB 커넥터 로딩 성공
 
 		// DB 접속 시작
-		String url = "jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
-		String user = "sbsst";
+		String url = "jdbc:mysql://site36.iu.gy:3306/site36?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
+		String user = "site36";
 		String password = "sbs123414";
 
 		try (Connection connection = DriverManager.getConnection(url, user, password)) {

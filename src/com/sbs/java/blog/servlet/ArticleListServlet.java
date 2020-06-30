@@ -36,8 +36,8 @@ public class ArticleListServlet extends HttpServlet {
 		// DB 커넥터 로딩 성공
 
 		// DB 접속 시작
-		String url = "jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
-		String user = "sbsst";
+		String url = "jdbc:mysql://site36.iu.gy:3306/site36?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
+		String user = "site36";
 		String password = "sbs123414";
 
 		try (Connection connection = DriverManager.getConnection(url, user, password)) {
@@ -47,7 +47,7 @@ public class ArticleListServlet extends HttpServlet {
 			// System.out.println(article);
 			
 			request.setAttribute("articles", articles);
-			request.getRequestDispatcher("/jsp/article/detail.jsp").forward(request, response);
+			request.getRequestDispatcher("/jsp/article/list.jsp").forward(request, response);
 
 		} catch (SQLException e) {
 			System.err.printf("[SQLException 예외, %s]\n", e.getMessage());
@@ -66,11 +66,13 @@ public class ArticleListServlet extends HttpServlet {
 
 		List<Article> articles = new ArrayList<>();
 		List<Map<String, Object>> rows = DBUtil.selectRows(conn, sql);
-
+		
+//		System.out.println(rows);
+		
 		for (Map<String, Object> row : rows) {
 			articles.add(new Article(row));
 		}
-
+		
 		return articles;
 	}
 }

@@ -1,0 +1,45 @@
+크롬 => 특정 URL에 접속
+웹서버 
+
+
+Main
+App
+ArticleController
+MemberService
+MemberDao
+JDBC
+MySQL Driver
+MySQL
+site3 Database
+member 테이블
+~~
+...
+MySQL Driver
+JDBC
+MemberDao
+MemberService
+ArticleController
+
+
+https://mangkyu.tistory.com/14
+https://anster.tistory.com/128
+https://swjeong.tistory.com/13
+
+
+RequestDispatcher rd = request.getRequestDispatcher("/jsp/home/dan.jsp");
+int dan = Integer.parseInt(request.getParameter("dan"));
+
+request.setAttribute("name", dan+"단");
+request.setAttribute("dan", dan);
+rd.forward(req,resp);
+
+
+h1 구구단 ${name} 출력
+
+div
+<% for( int i = 1; i <= 9; i++) %>
+	div
+	<%=dan%> * <%=i%> = <%=dan*i%>
+	div
+<% } %>
+div

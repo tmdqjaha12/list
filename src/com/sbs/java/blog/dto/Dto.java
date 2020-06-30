@@ -5,10 +5,14 @@ import java.util.Map;
 public class Dto {
 	private int id;
 	private String regDate;
-
+	
+	public Dto() {
+		
+	}
+	
 	public Dto(Map<String, Object> row) {
-		this.id = (int) row.get("id");
-		this.regDate = (String) row.get("regDate");
+		this.id = (int)row.get("id");
+		this.regDate = (String)row.get("regDate");
 	}
 
 	public int getId() {

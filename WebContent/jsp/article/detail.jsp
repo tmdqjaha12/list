@@ -41,15 +41,20 @@
 <link rel="stylesheet"
 	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 
-<div class="con">
-	<h1><%=article.getTitle()%></h1>
-	
-	<div>
-		이모지 테스트 : 😀😁
-	</div>
+<div style="margin-top:200px;" class="con">
 	
 	<div id="origin1" style="display: none;"><%=article.getBody()%></div>
 	<div id="viewer1"></div>
+	<script>
+		var editor1__initialValue = $('#origin1').html();
+		var editor1 = new toastui.Editor({
+			el : document.querySelector('#viewer1'),
+			height : '600px',
+			initialValue : editor1__initialValue,
+			viewer : true,
+			plugins : [ toastui.Editor.plugin.codeSyntaxHighlight ]
+		});
+	</script>
 </div>
 
 
