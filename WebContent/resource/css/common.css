@@ -338,6 +338,11 @@ label[for] {
     .bg-java{
     	margin-top: 150px;
     }
+    
+    .mobile-side-bar {
+    	z-index: 5;
+    }
+   
 }
 
 @media (min-width:800px) {
