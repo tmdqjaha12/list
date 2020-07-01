@@ -12,6 +12,45 @@ import java.util.List;
 import java.util.Map;
 
 public class DBUtil {
+	public static int selectCount(Connection connection, String sql) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		int rowcount = 0;
+
+		try {
+			stmt = connection.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			if(rs.next()) {
+				rowcount = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			System.err.println("[SQLException 예외]");
+			System.err.println("msg : " + e.getMessage());
+		} finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					System.err.println("[SQLException 예외]");
+					System.err.println("msg : " + e.getMessage());
+				}
+			}
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					System.err.println("[SQLException 예외]");
+					System.err.println("msg : " + e.getMessage());
+				}
+			}
+		}
+		
+		return rowcount;
+	}
+	
 	public static Map<String, Object> selectRow(Connection connection, String sql) {
 		List<Map<String, Object>> rows = selectRows(connection, sql);
 
@@ -35,6 +74,7 @@ public class DBUtil {
 			rs = stmt.executeQuery(sql);
 			ResultSetMetaData metaData = rs.getMetaData();
 			int columnSize = metaData.getColumnCount();
+//			System.out.println(columnSize);
 
 			while (rs.next()) {
 //				System.out.println();

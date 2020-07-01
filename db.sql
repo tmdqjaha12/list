@@ -59,10 +59,24 @@ INSERT INTO article SET
 regDate = NOW(),
 updateDate = NOW(),
 cateItemId = 1,
-displayStatus = 1,
-title = '자바를 시작합니다.',
+displayStatus = 2,
+title = '자바스크립트를 시작합니다.',
 `body` = '';
 
 # 게시물 테이블 확인
 SELECT *
 FROM article;
+
+# 
+SELECT * 
+FROM article
+WHERE displayStatus = 1 AND cateItemId = 2
+ORDER BY id 
+DESC LIMIT 0, 5;
+
+# page
+SELECT COUNT(*) FROM article WHERE cateItemId = 1;
+# int itemsInAPage = 5; //한 페이지에 나오는 게시물 수
+# int LimitFrom = (page - 1) * itemsInAPage;
+# totalPage = Math.ceil((double)totalCount / itemsInAPage);
+# <a href="${pageContext.request.contextPath}/s/article?/cateItemId={$param.cateItemId}&page=<%=i%>

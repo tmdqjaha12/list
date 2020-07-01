@@ -6,6 +6,9 @@
 <%
 	List<Article> articles = (List<Article>) request.getAttribute("articles");
 %>
+<% 
+	int count = (int) request.getAttribute("count");
+%>
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
@@ -41,11 +44,79 @@
 <!-- 토스트 UI 에디터, CSS 코어 -->
 <link rel="stylesheet"
 	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+	
+	<style type="text/css"> .numButton:hover{color: blue;} </style>
 
-<img class="bg-java" style="border-radius: 50px; width:100%; opacity: 0.35; z-index:-1; position:absolute;"
+<img class="bg-java"
+	style="border-radius: 50px; width: 100%; opacity: 0.35; z-index: -1; position: absolute;"
 	src="${pageContext.request.contextPath}/resource/img/java.jpg" alt="" />
+	
+	<input type="hidden" name="page" value="1"/>
+	<input type="hidden" name="page" value="1"/>
 
-<h1 style="text-align: center;">게시물 리스트</h1>
+<div class="button con" style="text-align:center; position:relative; margin-top:50px;">
+	<form action="/blog/s/article/list" method="get">
+		<div style="position:absolute; top:0; left:50%; transform:translateX(-50%);">		
+			<ul class="row">
+				<li class="cell"><button type="submit" name="cateItemId" value="1"><% %>JAVA</button></li>
+				<li class="cell"><button type="submit" name="cateItemId" value="2">JavaScript</button></li>
+				<li class="cell"><button type="submit" name="cateItemId" value="3">DB</button></li>
+				<li class="cell"><button type="submit" name="cateItemId" value="4">Spring</button></li>
+				<li class="cell"><button type="submit" name="cateItemId" value="5">Algorithm</button></li>
+				<input type="hidden" name="page" value="1"/>
+			</ul>
+		</div>
+	</form>
+
+<%
+int cateItemId = 0;
+if(request.getParameter("cateItemId") != null){
+	cateItemId = Integer.parseInt(request.getParameter("cateItemId"));
+}
+%>
+<%
+int page_ = 0;
+if(request.getParameter("page") != null){
+	page_ = Integer.parseInt(request.getParameter("page"));
+}
+int minPage = page_-1;
+int pluPage = page_+1;
+if(page_-1 == 0){
+	minPage = 1;
+}
+if(page_+1 == 0){
+	minPage = 1;
+}
+%>
+	
+	<form action="/blog/s/article/list" method="get">
+		<div style="position:absolute; left:50%; transform:translateX(-50%) translateY(100%);">
+			<input type="hidden" name="cateItemId" value="<%=cateItemId%>"/>
+			<button type="submit" name="page" value="<%=minPage%>">prev</button>
+			
+			<% if(page_ != 0){%>
+				<%for(int i = page_; i < page_+5; i++){%>
+					<div style="display:inline-block; margin-top:7px;">
+						<a hover="" href="${pageContext.request.contextPath}/s/article/list?cateItemId=<%=cateItemId%>&page=<%=i%>" class="numButton" style="padding: 5px; font-weight:bold;"><%=i%></a>
+					</div>	
+				<%}
+				}
+			%>
+			
+			<button type="submit" name="page" value="<%=pluPage%>">next</button>
+		</div>
+	</form>
+</div>
+
+
+<!-- <input type="hidden" name="JAVA" value="1"/>
+<input type="hidden" name="JavaScript" value="2"/>
+<input type="hidden" name="DB" value="3"/>
+<input type="hidden" name="Spring" value="4"/>
+<input type="hidden" name="Algorithm" value="5"/> -->
+
+<h1 style="text-align: center; margin-top: 140px;">게시물 리스트</h1>
+<h2 style="text-align: center;">== <%=page_%>페이지 ==</h2>
 
 <div class="con menu1">
 	<ul class="row menu-list-1">

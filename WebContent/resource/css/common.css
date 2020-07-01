@@ -538,3 +538,14 @@ label[for] {
 	margin-right: 100px;
 	bottom:auto;
 }
+
+/* number */
+.numButton {
+	display:block;
+	padding: 5px; 
+	font-weight:bold;
+}
+
+.numButton:hover{
+	color:red;
+}

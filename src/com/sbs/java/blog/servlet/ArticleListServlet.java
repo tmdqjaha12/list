@@ -22,6 +22,18 @@ public class ArticleListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
+		int cateItemId = 0;
+		int page = 1;
+		
+		if(request.getParameter("cateItemId") != null) {
+			cateItemId = Integer.parseInt(request.getParameter("cateItemId"));
+		}
+		
+		if(request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		
+		
 
 		// DB 커넥터 로딩 시작
 		String driverName = "com.mysql.cj.jdbc.Driver";
@@ -43,10 +55,14 @@ public class ArticleListServlet extends HttpServlet {
 		try (Connection connection = DriverManager.getConnection(url, user, password)) {
 			// DB 접속 성공
 
-			List<Article> articles = getArticles(connection);
+			List<Article> articles = getArticles(connection, cateItemId, page);
 			// System.out.println(article);
 			
+			int count = getCount(connection, cateItemId);
+			System.out.println(count);
+			
 			request.setAttribute("articles", articles);
+			request.setAttribute("count", count);
 			request.getRequestDispatcher("/jsp/article/list.jsp").forward(request, response);
 
 		} catch (SQLException e) {
@@ -56,13 +72,17 @@ public class ArticleListServlet extends HttpServlet {
 		}
 	}
 
-	private List<Article> getArticles(Connection conn) {
+	private List<Article> getArticles(Connection conn, int cateItemId, int page) {
+		int page_ = 5;
+		
 //		sb.append(String.format("WHERE 1 "));
 		String sql = "";
 
 		sql += String.format("SELECT * ");
 		sql += String.format("FROM `article` ");
-		sql += String.format("ORDER BY id DESC ");
+		sql += String.format("WHERE displayStatus = 1 AND cateItemId = %d ", cateItemId);
+		sql += String.format("ORDER BY id ");
+		sql += String.format("DESC LIMIT %d, 5 ", (page_*page)-5);
 
 		List<Article> articles = new ArrayList<>();
 		List<Map<String, Object>> rows = DBUtil.selectRows(conn, sql);
@@ -74,5 +94,15 @@ public class ArticleListServlet extends HttpServlet {
 		}
 		
 		return articles;
+	}
+	
+	private int getCount(Connection conn, int cateItemId) {
+		String sql = "";
+
+		sql += String.format("SELECT COUNT(*) ");
+		sql += String.format("FROM `article` ");
+		sql += String.format("WHERE cateItemId = %d ", cateItemId);
+		
+		return DBUtil.selectCount(conn, sql);
 	}
 }
