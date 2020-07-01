@@ -1,4 +1,4 @@
-package com.sbs.java.blog.servlet;
+ package com.sbs.java.blog.servlet;
 
 import java.io.IOException;
 import java.sql.Connection;

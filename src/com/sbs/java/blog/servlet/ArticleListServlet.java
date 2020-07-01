@@ -59,7 +59,7 @@ public class ArticleListServlet extends HttpServlet {
 			// System.out.println(article);
 			
 			int count = getCount(connection, cateItemId);
-			System.out.println(count);
+//			System.out.println(count);
 			
 			request.setAttribute("articles", articles);
 			request.setAttribute("count", count);
