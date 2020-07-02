@@ -13,8 +13,20 @@ public class ArticleService {
 		articleDao = new ArticleDao(dbConn);
 	}
 
-	public List<Article> getForPrintListArticles() {
-		return articleDao.getForPrintListArticles();
+	public List<Article> getForPrintListArticles(int cateItemId,int  page) {
+		return articleDao.getForPrintListArticles(cateItemId, page);
+	}
+
+	public Article getForPrintDetailArticle(int id) {
+		return articleDao.getForPrintDetailArticle(id);
+	}
+
+	public int getForPrintArticlesCount(int cateItemId) {
+		return articleDao.getForPrintArticlesCount(cateItemId);
+	}
+
+	public int saveForWriteInsertArticle(String title, String body) {
+		return articleDao.saveForWriteInsertArticle(title, body);
 	}
 
 }

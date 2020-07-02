@@ -12,6 +12,72 @@ import java.util.List;
 import java.util.Map;
 
 public class DBUtil {
+//	public int delete(String sql) {
+//		int affectedRows = 0;
+//
+//		Statement stmt;
+//		try {
+//			stmt = connection.createStatement();
+//			affectedRows = stmt.executeUpdate(sql);
+//		} catch (SQLException e) {
+//			System.err.printf("[SQL 예외, SQL : %s] : %s\n", sql, e.getMessage());
+//		}
+//
+//		return affectedRows;
+//	}
+//
+//	public int update(String sql) {
+//		int affectedRows = 0;
+//
+//		Statement stmt;
+//		try {
+//			stmt = connection.createStatement();
+//			affectedRows = stmt.executeUpdate(sql);
+//		} catch (SQLException e) {
+//			System.err.printf("[SQL 예외, SQL : %s] : %s\n", sql, e.getMessage());
+//		}
+//
+//		return affectedRows;
+//	}
+//
+//	public int insert(String sql) {
+//		int id = -1;
+//
+//		try {
+//			Statement stmt = connection.createStatement();
+//			stmt.execute(sql, Statement.RETURN_GENERATED_KEYS);
+//			ResultSet rs = stmt.getGeneratedKeys();
+//
+//			if (rs.next()) {
+//				id = rs.getInt(1);
+//			}
+//
+//		} catch (SQLException e) {
+//			System.err.printf("[SQL 예외, SQL : %s] : %s\n", sql, e.getMessage());
+//		}
+//
+//		return id;
+//	}
+
+	public static int insert(Connection connection, String sql) {
+		int id = -1;
+		
+		try {
+			Statement stmt = connection.createStatement();
+			stmt.execute(sql, Statement.RETURN_GENERATED_KEYS);
+			ResultSet rs = stmt.getGeneratedKeys();
+
+			if (rs.next()) {
+				id = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			System.err.printf("[SQL 예외, SQL : %s] : %s\n", sql, e.getMessage());
+		}
+
+		return id;
+	}
+
 	public static int selectCount(Connection connection, String sql) {
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -20,11 +86,11 @@ public class DBUtil {
 		try {
 			stmt = connection.createStatement();
 			rs = stmt.executeQuery(sql);
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				rowcount = rs.getInt(1);
 			}
-			
+
 		} catch (SQLException e) {
 			System.err.println("[SQLException 예외]");
 			System.err.println("msg : " + e.getMessage());
@@ -47,10 +113,10 @@ public class DBUtil {
 				}
 			}
 		}
-		
+
 		return rowcount;
 	}
-	
+
 	public static Map<String, Object> selectRow(Connection connection, String sql) {
 		List<Map<String, Object>> rows = selectRows(connection, sql);
 

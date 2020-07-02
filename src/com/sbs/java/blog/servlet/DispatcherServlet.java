@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.controller.ArticleController;
 import com.sbs.java.blog.controller.Controller;
+import com.sbs.java.blog.controller.HomeController;
 import com.sbs.java.blog.controller.MemberController;
 import com.sbs.java.blog.dto.Article;
 
@@ -41,21 +42,17 @@ public class DispatcherServlet extends HttpServlet {
 		try (Connection dbConn = DriverManager.getConnection(url, user, password)) {
 			// DB 접속 성공
 
-			// alt shif r rename
-			// /s/article/list
+
 			String contextPath = req.getContextPath();
 			String requestURI = req.getRequestURI();
-			// System.out.println("contextPath : " + contextPath);
-			// System.out.println("requestURI" + requestURI);
 			String actionStr = requestURI.replace(contextPath + "/s/", "");
-			// System.out.println("actionStr : " + actionStr);
 			String[] actionStrBits = actionStr.split("/");
 
 			String controllerName = actionStrBits[0];
 			String actionMethodName = actionStrBits[1];
 
-			System.out.printf("controllerName : %s\n", controllerName);
-			System.out.printf("actionMethodName : %s\n", actionMethodName);
+//			System.out.printf("controllerName : %s\n", controllerName);
+//			System.out.printf("actionMethodName : %s\n", actionMethodName);
 
 			Controller controller = null;
 
@@ -63,17 +60,22 @@ public class DispatcherServlet extends HttpServlet {
 			case "article":
 				controller = new ArticleController(dbConn);
 				break;
+			case "home" :
+				controller = new HomeController();
+				break;
 			case "member":
-				controller = new MemberController();
+				controller = new MemberController(dbConn);
 				break;
 			}
 
 			if (controller != null) {
 				String viewPath = controller.doAction(actionMethodName, req, resp);
+				
 				if ( viewPath.equals("") ) {
 					resp.getWriter().append("ERROR, CODE 1");
 				}
 				viewPath = "/jsp/" + viewPath + ".jsp";
+//				System.out.println("viewPath");
 				req.getRequestDispatcher(viewPath).forward(req, resp);
 			} else {
 				resp.getWriter().append("존재하지 않는 페이지 입니다.");

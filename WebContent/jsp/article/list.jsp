@@ -56,7 +56,7 @@
 
 <div class="button con" style="text-align:center; position:relative; margin-top:50px;">
 	<form action="/blog/s/article/list" method="get">
-		<div style="position:absolute; top:0; left:50%; transform:translateX(-50%);">		
+		<div class="cate" style="position:absolute; top:0; left:50%; transform:translateX(-50%);">		
 			<ul class="row">
 				<li class="cell"><button type="submit" name="cateItemId" value="1"><% %>JAVA</button></li>
 				<li class="cell"><button type="submit" name="cateItemId" value="2">JavaScript</button></li>
@@ -76,21 +76,26 @@ if(request.getParameter("cateItemId") != null){
 %>
 <%
 int page_ = 0;
+int pageNow = 0;
 if(request.getParameter("page") != null){
 	page_ = Integer.parseInt(request.getParameter("page"));
+	
+	pageNow = page_;
+	if(page_%5 == 0){
+		page_ = page_-4;
+	}else if (page_%5 != 0){
+		page_ = page_ - (page_%5) + 1;
+	}
 }
 int minPage = page_-1;
-int pluPage = page_+1;
+int pluPage = page_+5;
 if(page_-1 == 0){
-	minPage = 1;
-}
-if(page_+1 == 0){
 	minPage = 1;
 }
 %>
 	
 	<form action="/blog/s/article/list" method="get">
-		<div style="position:absolute; left:50%; transform:translateX(-50%) translateY(100%);">
+		<div class="prevNext" style="position:absolute; left:50%; transform:translateX(-50%) translateY(100%);">
 			<input type="hidden" name="cateItemId" value="<%=cateItemId%>"/>
 			<button type="submit" name="page" value="<%=minPage%>">prev</button>
 			
@@ -99,6 +104,10 @@ if(page_+1 == 0){
 					<div style="display:inline-block; margin-top:7px;">
 						<a hover="" href="${pageContext.request.contextPath}/s/article/list?cateItemId=<%=cateItemId%>&page=<%=i%>" class="numButton" style="padding: 5px; font-weight:bold;"><%=i%></a>
 					</div>	
+					<%if(i > count/5){
+						pluPage = i;
+						break;
+					}%>
 				<%}
 				}
 			%>
@@ -115,8 +124,30 @@ if(page_+1 == 0){
 <input type="hidden" name="Spring" value="4"/>
 <input type="hidden" name="Algorithm" value="5"/> -->
 
-<h1 style="text-align: center; margin-top: 140px;">게시물 리스트</h1>
-<h2 style="text-align: center;">== <%=page_%>페이지 ==</h2>
+<%
+String cateItem = "";
+switch(cateItemId){
+	case 1:
+		cateItem = "JAVA";
+		break;
+	case 2:
+		cateItem = "자바스크립트";
+		break;
+	case 3:
+		cateItem = "DB";
+		break;
+	case 4:
+		cateItem = "스프링";
+		break;
+	case 5:
+		cateItem = "알고리즘";
+		break;
+}
+%>
+
+<h1 style="text-align: center; margin-top: 140px;"><%=cateItem%>*게시물 리스트</h1>
+<h2 style="text-align: center;">== <%=pageNow%>페이지 ==</h2>
+<h3 style="text-align: center;">현재 게시판 게시물 수 : <%=count%></h3>
 
 <div class="con menu1">
 	<ul class="row menu-list-1">
@@ -135,7 +166,7 @@ if(page_+1 == 0){
 		<li class="cell"><%=article.getId()%></li>
 		<li class="cell"><%=article.getRegDate()%></li>
 		<li class="cell"><%=article.getUpdateDate()%></li>
-		<li class="cell"><a href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></li>
+		<li class="cell title"><a href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></li>
 	</ul>
 	<%
 		}

@@ -342,7 +342,11 @@ label[for] {
     .mobile-side-bar {
     	z-index: 5;
     }
-   
+    
+    .button {
+    	top: 700px !important;
+    }
+    
 }
 
 @media (min-width:800px) {
@@ -539,13 +543,28 @@ label[for] {
 	bottom:auto;
 }
 
-/* number */
-.numButton {
-	display:block;
-	padding: 5px; 
-	font-weight:bold;
+/*
+.button {
+	text-align:center; 
+	position:relative; 
+	margin-top:50px;
 }
 
-.numButton:hover{
-	color:red;
+.button .cate {
+	position:absolute; 
+	top:0; 
+	left:50%; 
+	transform:translateX(-50%);
+}
+
+.buttn .prevNext {
+	position:absolute; 
+	left:50%; 
+	transform:translateX(-50%) translateY(100%);
+}
+*/
+
+
+.title:hover {
+	text-decoration:underline;
 }

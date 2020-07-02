@@ -14,24 +14,62 @@ public class ArticleDao {
 	public ArticleDao(Connection dbConn) {
 		this.dbConn = dbConn;
 	}
-	
-	public List<Article> getForPrintListArticles() {
+
+	public List<Article> getForPrintListArticles(int cateItemId, int page) {
+		int page_ = 5;
+
+//		sb.append(String.format("WHERE 1 "));
 		String sql = "";
-		
+
 		sql += String.format("SELECT * ");
-		sql += String.format("From article ");
-		sql += String.format("WHERE displayStatus = 1 ");
-		sql += String.format("ORDER BY id DESC ");
-		sql += String.format("LIMIT 0, 5");
-		
-		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, sql);
+		sql += String.format("FROM `article` ");
+		sql += String.format("WHERE displayStatus = 1 AND cateItemId = %d ", cateItemId);
+		sql += String.format("ORDER BY id ");
+		sql += String.format("DESC LIMIT %d, 5 ", (page_ * page) - 5);
+
 		List<Article> articles = new ArrayList<>();
-		
-		for( Map<String, Object> row : rows) {
+		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, sql);
+
+//		System.out.println(rows);
+
+		for (Map<String, Object> row : rows) {
 			articles.add(new Article(row));
 		}
-		
+
 		return articles;
+	}
+
+	public Article getForPrintDetailArticle(int id) {
+		String sql = "";
+
+		sql += String.format("SELECT * ");
+		sql += String.format("FROM article ");
+		sql += String.format("WHERE id = %d ", id);
+
+		Map<String, Object> row = DBUtil.selectRow(dbConn, sql);
+
+		return new Article(row);
+	}
+
+	public int getForPrintArticlesCount(int cateItemId) {
+		String sql = "";
+
+		sql += String.format("SELECT COUNT(*) ");
+		sql += String.format("FROM `article` ");
+		sql += String.format("WHERE cateItemId = %d ", cateItemId);
+		
+		return DBUtil.selectCount(dbConn, sql);
+	}
+
+	public int saveForWriteInsertArticle(String title, String body) {
+		String sql = "";
+		sql += String.format("INSERT INTO article ");
+		sql += String.format("SET regDate = NOW()");
+		sql += String.format(", updateDate = NOW()");
+		sql += String.format(", title = '%s'", title);
+		sql += String.format(", body = '%s'", body);
+		
+		return DBUtil.insert(dbConn, sql);
 	}
 
 }

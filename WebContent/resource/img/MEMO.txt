@@ -1,4 +1,8 @@
+ctrl shift r 캐시초기화
+
+
 사이트정보
+
 주소 : site36.iu.gy:8080
 운영주소 : https://meloporn.blog.iu.gy/blog/s/home/main
 
