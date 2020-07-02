@@ -42,9 +42,14 @@ public class ArticleDao {
 	public Article getForPrintDetailArticle(int id) {
 		String sql = "";
 
-		sql += String.format("SELECT * ");
+//		sql += String.format("SELECT * ");
+//		sql += String.format("FROM article ");
+//		sql += String.format("WHERE id = %d ", id);
+		sql += String.format("SELECT *, '하승범' AS extra__writer ");
 		sql += String.format("FROM article ");
-		sql += String.format("WHERE id = %d ", id);
+		sql += String.format("WHERE 1 ");
+		sql += String.format("AND id = %d ", id);
+		sql += String.format("AND displayStatus = 1 ");
 
 		Map<String, Object> row = DBUtil.selectRow(dbConn, sql);
 

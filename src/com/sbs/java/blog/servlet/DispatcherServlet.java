@@ -15,7 +15,7 @@ import com.sbs.java.blog.controller.ArticleController;
 import com.sbs.java.blog.controller.Controller;
 import com.sbs.java.blog.controller.HomeController;
 import com.sbs.java.blog.controller.MemberController;
-import com.sbs.java.blog.dto.Article;
+import com.sbs.java.blog.util.Util;
 
 @WebServlet("/s/*")
 public class DispatcherServlet extends HttpServlet {
@@ -35,7 +35,7 @@ public class DispatcherServlet extends HttpServlet {
 		// DB 커넥터 로딩 성공
 
 		// DB 접속 시작
-		String url = "jdbc:mysql://site36.iu.gy:3306/site36?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
+		String url = "jdbc:mysql://site36.iu.gy:3306/site36?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull";//제로데이트 옵션추가	
 		String user = "site36";
 		String password = "sbs123414";
 
@@ -74,7 +74,7 @@ public class DispatcherServlet extends HttpServlet {
 				if ( viewPath.equals("") ) {
 					resp.getWriter().append("ERROR, CODE 1");
 				}
-				viewPath = "/jsp/" + viewPath + ".jsp";
+				viewPath = "/jsp/" + viewPath;
 //				System.out.println("viewPath");
 				req.getRequestDispatcher(viewPath).forward(req, resp);
 			} else {
@@ -82,13 +82,9 @@ public class DispatcherServlet extends HttpServlet {
 			}
 
 		} catch (SQLException e) {
-			System.err.printf("[SQLException 예외, %s]\n", e.getMessage());
-			resp.getWriter().append("DB연결 실패");
-			return;
+			Util.printEx("SQL 예외(커넥션 열기)", resp, e);
 		} catch (Exception e) {
-			System.err.printf("[기타Exception 예외, %s]\n", e.getMessage());
-			resp.getWriter().append("기타 실패");
-			return;
+			Util.printEx("기타 예외", resp, e);
 		}
 
 		// DB끝

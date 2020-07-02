@@ -22,10 +22,9 @@ public class Article extends Dto {
 
 	@Override
 	public String toString() {
-		return "Article [id=" + getId() + ", regDate=" + getRegDate() + ", updateDate=" + updateDate + ", cateItemId="+ cateItemId + ", title="
-				+ title + ", body=" + body + "]";
+		return "Article [updateDate=" + updateDate + ", cateItemId=" + cateItemId + ", title=" + title + ", body="
+				+ body + ", toString()=" + super.toString() + "]";
 	}
-	
 
 	public int getCateItemId() {
 		return cateItemId;

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.service.ArticleService;
 import com.sbs.java.blog.util.DBUtil;
+import com.sbs.java.blog.util.Util;
 
 public class ArticleController extends Controller {
 	private ArticleService articleService;
@@ -38,16 +39,36 @@ public class ArticleController extends Controller {
 		
 		articleService.saveForWriteInsertArticle(title, body); //int return
 		
-		return "article/doWrite";
+		return "article/doWrite.jsp";
 	}
 
+//	private String doActionDetail(HttpServletRequest req, HttpServletResponse resp) {
+//		int id = Integer.parseInt(req.getParameter("id"));
+//		Article article = articleService.getForPrintDetailArticle(id);
+//		
+//		req.setAttribute("article", article);
+//		
+//		return "article/detail.jsp";
+//	}
+	
 	private String doActionDetail(HttpServletRequest req, HttpServletResponse resp) {
-		int id = Integer.parseInt(req.getParameter("id"));
+		if (Util.empty(req, "id")) {
+			return "plain:id를 입력해주세요.";
+		}
+
+		if (Util.isNum(req, "id") == false) {
+			return "plain:id를 정수로 입력해주세요.";
+		}
+
+		int id = Util.getInt(req, "id");
+
 		Article article = articleService.getForPrintDetailArticle(id);
-		
+
+//		ex) article.getExtra().get("writer");
+
 		req.setAttribute("article", article);
-		
-		return "article/detail";
+
+		return "article/detail.jsp";
 	}
 
 	private String doActionList(HttpServletRequest req, HttpServletResponse resp) {
@@ -67,7 +88,7 @@ public class ArticleController extends Controller {
 		req.setAttribute("articles", articles);
 		req.setAttribute("count", count);
 		
-		return "article/list";
+		return "article/list.jsp";
 	}
 	
 	private int getCount(int cateItemId) {

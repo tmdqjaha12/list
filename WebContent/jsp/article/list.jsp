@@ -101,9 +101,16 @@ if(page_-1 == 0){
 			
 			<% if(page_ != 0){%>
 				<%for(int i = page_; i < page_+5; i++){%>
+					<%if(pageNow == i){%>
+					<div style="display:inline-block; margin-top:7px; color:blue;">
+						<a hover="" href="${pageContext.request.contextPath}/s/article/list?cateItemId=<%=cateItemId%>&page=<%=i%>" class="numButton" style="padding: 5px; font-weight:bold;"><%=i%></a>
+					</div>	
+					<%} else {%>
 					<div style="display:inline-block; margin-top:7px;">
 						<a hover="" href="${pageContext.request.contextPath}/s/article/list?cateItemId=<%=cateItemId%>&page=<%=i%>" class="numButton" style="padding: 5px; font-weight:bold;"><%=i%></a>
 					</div>	
+					<% } %>
+				
 					<%if(i > count/5){
 						pluPage = i;
 						break;
