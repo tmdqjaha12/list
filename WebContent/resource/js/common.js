@@ -8,7 +8,7 @@ function MobileSideBar__init() {
             $this.removeClass('active');
             $('.mobile-side-bar').removeClass('active');
         } else {
-            $this.addClass('active')
+            $this.addClass('active');
             $('.mobile-side-bar').addClass('active');
         }
     });
@@ -19,11 +19,28 @@ $(function () {
 });
 
 
-var editor1__initialValue = $('#origin1').html();
-		var editor1 = new toastui.Editor({
-			el : document.querySelector('#viewer1'),
-			height : '600px',
-			initialValue : editor1__initialValue,
-			viewer : true,
-			plugins : [ toastui.Editor.plugin.codeSyntaxHighlight ]
+function MobileSideSubMenu__init() {
+	$('.mobile-side-bar .menu-box-1>ul>li').click(function () {
+		var $this = $(this);
+		
+		if ($this.hasClass('active')) {
+            $this.removeClass('active');
+        } else {
+            $this.addClass('active');
+        }
+	});
+}
+
+$(function() {
+	MobileSideSubMenu__init();
 });
+
+//
+//var editor1__initialValue = $('#origin1').html();
+//	var editor1 = new toastui.Editor({
+//		el : document.querySelector('#viewer1'),
+//		height : '600px',
+//		initialValue : editor1__initialValue,
+//		viewer : true,
+//		plugins : [ toastui.Editor.plugin.codeSyntaxHighlight ]
+//});

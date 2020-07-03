@@ -55,12 +55,12 @@ CREATE TABLE article (
 );
 
 # 게시물 추가
-INSERT INTO article SET
+INSERT INTO article SET 
 regDate = NOW(),
 updateDate = NOW(),
-cateItemId = 1,
-displayStatus = 2,
-title = '자바스크립트를 시작합니다.',
+cateItemId = 5,
+displayStatus = 1,
+title = '알고리즘을 시작합니다.',
 `body` = '';
 
 # 게시물 테이블 확인
@@ -74,6 +74,19 @@ WHERE displayStatus = 1 AND cateItemId = 2
 ORDER BY id 
 DESC LIMIT 0, 5;
 
+
+SELECT * 
+FROM article
+WHERE 1
+AND title = '자바를';
+AND displayStatus = 1;
+
+SELECT * 
+FROM article 
+WHERE `title`
+LIKE '%자바%'; OR '%알고%'; // (전방일치) 
+> SELECT * FROM sample WHERE TEXT LIKE '%SQL%'; // (중간일치) 
+https://gmlwjd9405.github.io/2019/04/25/db-SQL-select.html
 # page
 SELECT COUNT(*) FROM article WHERE cateItemId = 1;
 # int itemsInAPage = 5; //한 페이지에 나오는 게시물 수

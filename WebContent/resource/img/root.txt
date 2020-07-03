@@ -1,0 +1,3 @@
+<script> location.replace('/blog/s/home/main')</script>
+
+index.jsp

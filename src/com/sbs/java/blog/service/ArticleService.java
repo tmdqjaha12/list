@@ -20,6 +20,10 @@ public class ArticleService {
 	public Article getForPrintDetailArticle(int id) {
 		return articleDao.getForPrintDetailArticle(id);
 	}
+	
+//	public List<Article> getForPrintDetailArticle(String title) {
+//		return articleDao.getForPrintDetailArticle(title);
+//	}
 
 	public int getForPrintArticlesCount(int cateItemId) {
 		return articleDao.getForPrintArticlesCount(cateItemId);

@@ -180,6 +180,13 @@ switch(cateItemId){
 	%>
 </div>
 
+<div class="search" style="position: absolute; top: 200px; right: 5%; display: inline-block; padding:10px; border:2px solid #271f87; width: 230px;">
+	<form method="get" action="">
+		<input type="text" name="text" id="text" placeholder="검색" required />
+		<input type="submit" value="검색" />
+	</form>
+</div>
+
 
 
 

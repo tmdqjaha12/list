@@ -69,12 +69,31 @@ public class ArticleDao {
 	public int saveForWriteInsertArticle(String title, String body) {
 		String sql = "";
 		sql += String.format("INSERT INTO article ");
-		sql += String.format("SET regDate = NOW()");
-		sql += String.format(", updateDate = NOW()");
-		sql += String.format(", title = '%s'", title);
-		sql += String.format(", body = '%s'", body);
+		sql += String.format("SET regDate = NOW() ");
+		sql += String.format(", updateDate = NOW() ");
+		sql += String.format(", title = '%s' ", title);
+		sql += String.format(", body = '%s' ", body);
 		
 		return DBUtil.insert(dbConn, sql);
 	}
+
+//	public List<Article> getForPrintDetailArticle(String title) {
+//		String sql = "";
+//		
+//		sql += String.format("SELECT * ");
+//		sql += String.format("FROM article ");
+//		sql += String.format("WHERE `title` ");
+//		sql += String.format("AND `title` ", title);
+//		sql += String.format("LIKE '%%%s%%' ", title);
+//
+//		List<Article> articles = new ArrayList<>();
+//		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, sql);
+//
+//		for (Map<String, Object> row : rows) {
+//			articles.add(new Article(row));
+//		}
+//
+//		return articles;
+//	}
 
 }

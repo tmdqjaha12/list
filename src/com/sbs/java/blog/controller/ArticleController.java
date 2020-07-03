@@ -20,7 +20,7 @@ public class ArticleController extends Controller {
 
 	@Override
 	public String doAction(String actionMethodName, HttpServletRequest req, HttpServletResponse resp) {
-		//System.out.printf("article 컨트롤러인 나는 %s 요청을 받았다\n", actionMethodName);
+//		System.out.printf("article 컨트롤러인 나는 %s 요청을 받았다\n", actionMethodName);
 		switch ( actionMethodName ) {
 		case "list":
 			return doActionList(req, resp);
@@ -28,10 +28,26 @@ public class ArticleController extends Controller {
 			return doActionDetail(req, resp);
 		case "doWrite" :
 			return doActionDoWrite(req, resp);
+//		case "search" :
+//			return doActionSearch(req, resp);
 		}
 		
 		return "";
 	}
+
+//	private String doActionSearch(HttpServletRequest req, HttpServletResponse resp) {
+//		String title =req.getParameter("text");
+//		
+//		List<Article> articles = articleService.getForPrintDetailArticle(title);
+//		
+//		req.setAttribute("articles", articles);
+//		
+//		for(Article article : articles) {
+//			System.out.println(article.getBody());
+//		}
+//		
+//		return "article/search.jsp";
+//	}
 
 	private String doActionDoWrite(HttpServletRequest req, HttpServletResponse resp) {
 		String title = req.getParameter("title");
